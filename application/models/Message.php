@@ -30,7 +30,7 @@ class Message extends Model
     
     public function getMessages($limit, $offset)
     {
-        return $this->db->row('SELECT * FROM messages LIMIT '. $limit .' OFFSET '. $offset);
+        return $this->db->row('SELECT * FROM messages ORDER BY createtime DESC LIMIT '. $limit .' OFFSET '. $offset);
     }
     
     public function getMessage($id)
