@@ -23,7 +23,10 @@
 
 # Регистрация пользователя
 URI адрес: user/register
-POST запрос: "email": E-Mail, "password": Пароль
+POST запрос: 
+```
+  "email": E-Mail, "password": Пароль
+```
 JSON ответ: - или ошибка
 
 # Вход пользователя
