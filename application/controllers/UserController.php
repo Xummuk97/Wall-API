@@ -16,6 +16,12 @@ class UserController extends Controller
     {
         $this->headerAPI();
         
+        if (UserController::has())
+        {
+            $this->sendError('Пожалуйста, выйдите из аккаунта!');
+            return;
+        }
+        
         $errors = [];
         
         $name = Valid::normalStrFromPOST('name');
@@ -96,5 +102,10 @@ class UserController extends Controller
     public function logoutAction()
     {
         unset($_SESSION['user']);
+    }
+    
+    static public function has()
+    {
+        return isset($_SESSION['user']);
     }
 }

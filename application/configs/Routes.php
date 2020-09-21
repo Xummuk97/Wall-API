@@ -22,6 +22,21 @@ class Routes
                 'controller' => 'user',
                 'action' => 'logout'
             ],
+            
+            'message/add' => [
+                'controller' => 'message',
+                'action' => 'add'
+            ],
+            
+            'messages' => [
+                'controller' => 'message',
+                'action' => 'get'
+            ],
+            
+            'message/delete' => [
+                'controller' => 'message',
+                'action' => 'delete'
+            ],
         ];
     }
 

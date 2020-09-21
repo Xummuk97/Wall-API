@@ -43,7 +43,7 @@ class Db
         return $result->fetchColumn();
     }
 
-    public function getLastInsertIndex()
+    public function getInsertId()
     {
         return $this->db->lastInsertId();
     }
