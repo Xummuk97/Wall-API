@@ -8,22 +8,32 @@ abstract class Controller
 {
 
     protected $route;
-    protected $model;
+    protected $models = [];
     public $view;
 
     public function __construct($route)
     {
         $this->route = $route;
         $this->view  = new View($route);
-        $this->model = $this->loadModel($route['controller']);
+        $this->onCreate();
     }
 
+    abstract public function onCreate();
+
+    public function loadModels($models)
+    {
+        foreach ($models as $model)
+        {
+            $this->loadModel($model);
+        }
+    }
+    
     public function loadModel($name)
     {
         $model_path = 'application\models\\' . ucfirst($name);
 
         if (class_exists($model_path)) {
-            return new $model_path;
+            $this->models[$name] = new $model_path;
         }
     }
 
@@ -33,15 +43,13 @@ abstract class Controller
         header("Content-Type: application/json; charset=UTF-8");
     }
     
-    public function hasErrorsFields($arr)
+    public function sendErrors($errors)
     {
-        if (!empty($arr))
+        if (!empty($errors))
         {
             # Выводим ответ в виде ошибки, в котором указываем какое поле не заполнено
              echo json_encode([ 
-                'Errors' => [
-                    'Fields' => $arr,
-                ] 
+                'Errors' => $errors,
             ], JSON_UNESCAPED_UNICODE);
                 
             return true;
@@ -49,13 +57,9 @@ abstract class Controller
         return false;
     }
     
-    public function errorGlobal($error)
+    public function sendResponse($response)
     {
-        # Выводим ответ в виде ошибки
-        echo json_encode([ 
-            'Errors' => [
-                'Global' => $error,
-            ] 
-        ], JSON_UNESCAPED_UNICODE);
+        # Выводим ответ
+        echo json_encode($response, JSON_UNESCAPED_UNICODE);
     }
 }
