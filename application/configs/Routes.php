@@ -12,6 +12,16 @@ class Routes
                 'controller' => 'user',
                 'action' => 'register'
             ],
+            
+            'user/login' => [
+                'controller' => 'user',
+                'action' => 'login'
+            ],
+            
+            'user/logout' => [
+                'controller' => 'user',
+                'action' => 'logout'
+            ],
         ];
     }
 

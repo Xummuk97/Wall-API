@@ -43,6 +43,16 @@ abstract class Controller
         header("Content-Type: application/json; charset=UTF-8");
     }
     
+    public function sendError($error)
+    {
+        # Выводим ответ в виде ошибки, в котором указываем какое поле не заполнено
+        echo json_encode([ 
+            'Errors' => [
+                $error
+            ],
+        ], JSON_UNESCAPED_UNICODE);
+    }
+    
     public function sendErrors($errors)
     {
         if (!empty($errors))
